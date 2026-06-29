@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Arabi — Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E1116;
+    --bg-elev:#151A21;
+    --bg-elev-2:#1B222B;
+    --line:#262E38;
+    --text:#E7ECF1;
+    --text-dim:#8B97A6;
+    --amber:#D98E4A;
+    --teal:#4FD1C5;
+    --red:#E0667A;
+    --mono:'JetBrains Mono', monospace;
+    --display:'Space Grotesk', sans-serif;
+    --body:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events:none;
+    z-index:0;
+    mask-image: radial-gradient(circle at 50% 0%, rgba(0,0,0,.9), transparent 70%);
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(10px);
+    background:rgba(14,17,22,.78);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .logo{font-family:var(--mono); font-weight:600; font-size:15px; color:var(--amber); letter-spacing:.5px;}
+  .logo span{color:var(--text-dim);}
+  .navlinks{display:flex; gap:28px; font-family:var(--mono); font-size:13px; color:var(--text-dim);}
+  .navlinks a{transition:color .2s;}
+  .navlinks a:hover{color:var(--amber);}
+  @media (max-width:640px){ .navlinks{display:none;} }
+
+  /* HERO */
+  header.hero{padding:88px 0 70px; position:relative;}
+  .status-chip{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:12.5px; color:var(--teal);
+    background:rgba(79,209,197,.08); border:1px solid rgba(79,209,197,.25);
+    padding:5px 12px; border-radius:20px; margin-bottom:28px;
+  }
+  .status-chip::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--teal); box-shadow:0 0 8px var(--teal);}
+  .hero-grid{display:grid; grid-template-columns: 1.3fr .8fr; gap:48px; align-items:center;}
+  @media (max-width:780px){ .hero-grid{grid-template-columns:1fr;} }
+  h1.title{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(38px,5.4vw,58px); line-height:1.06; letter-spacing:-.02em;
+    margin-bottom:18px;
+  }
+  h1.title .accent{color:var(--amber);}
+  .role-line{font-family:var(--mono); font-size:16px; color:var(--text-dim); margin-bottom:22px;}
+  .role-line .blink{display:inline-block; width:9px; height:18px; background:var(--amber); vertical-align:middle; margin-left:4px; animation:blink 1.1s steps(2) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero-desc{color:var(--text-dim); font-size:16px; max-width:480px; margin-bottom:32px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; font-weight:500;
+    padding:12px 22px; border-radius:8px; border:1px solid var(--line);
+    transition: all .2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--amber); color:#1A1208; border-color:var(--amber);}
+  .btn-primary:hover{background:#ECA465; transform:translateY(-2px);}
+  .btn-ghost{color:var(--text); }
+  .btn-ghost:hover{border-color:var(--amber); color:var(--amber); transform:translateY(-2px);}
+
+  .avatar-card{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:16px;
+    padding:22px; position:relative;
+  }
+  .avatar-frame{
+    width:100%; aspect-ratio:1/1; border-radius:12px;
+    background:linear-gradient(160deg,var(--bg-elev-2),#0E1116);
+    border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; margin-bottom:16px;
+  }
+  .avatar-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+  .avatar-placeholder{color:var(--text-dim); font-family:var(--mono); font-size:12px; text-align:center; padding:0 20px;}
+  .term-line{font-family:var(--mono); font-size:12px; color:var(--text-dim); display:flex; justify-content:space-between;}
+  .term-line b{color:var(--teal); font-weight:500;}
+
+  /* SECTION HEADERS */
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:38px;}
+  .sec-tag{font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:1px;}
+  .sec-title{font-family:var(--display); font-size:clamp(26px,3vw,34px); font-weight:600;}
+  section{padding:80px 0;}
+  section + section{border-top:1px solid var(--line);}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media (max-width:780px){.about-grid{grid-template-columns:1fr;}}
+  .about-text p{color:var(--text-dim); margin-bottom:16px; font-size:15.5px;}
+  .stats{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  .stat-card{background:var(--bg-elev); border:1px solid var(--line); border-radius:12px; padding:20px;}
+  .stat-num{font-family:var(--mono); font-size:28px; color:var(--teal); font-weight:600;}
+  .stat-label{font-size:12.5px; color:var(--text-dim); margin-top:4px;}
+
+  /* SKILLS */
+  .skills-wrap{display:flex; flex-wrap:wrap; gap:10px;}
+  .skill-pill{
+    font-family:var(--mono); font-size:13px; color:var(--text);
+    border:1px solid var(--line); background:var(--bg-elev);
+    padding:9px 16px; border-radius:8px; transition:.2s;
+  }
+  .skill-pill:hover{border-color:var(--amber); color:var(--amber);}
+
+  /* PROJECTS — API endpoint cards */
+  .proj-card{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:14px;
+    margin-bottom:22px; overflow:hidden;
+  }
+  .proj-head{
+    display:flex; align-items:center; gap:14px; padding:18px 24px;
+    border-bottom:1px solid var(--line); flex-wrap:wrap;
+  }
+  .method{font-family:var(--mono); font-weight:700; font-size:13px; padding:4px 10px; border-radius:6px;}
+  .method.get{background:rgba(79,209,197,.12); color:var(--teal);}
+  .endpoint{font-family:var(--mono); font-size:14.5px; color:var(--text);}
+  .status-200{margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--teal); background:rgba(79,209,197,.1); border:1px solid rgba(79,209,197,.25); padding:3px 10px; border-radius:20px;}
+  .proj-body{padding:22px 24px;}
+  .proj-name{font-family:var(--display); font-size:20px; font-weight:600; margin-bottom:8px;}
+  .proj-desc{color:var(--text-dim); font-size:14.5px; margin-bottom:16px;}
+  .tech-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+  .tech-tag{font-family:var(--mono); font-size:11.5px; color:var(--text-dim); border:1px solid var(--line); padding:3px 9px; border-radius:5px;}
+  .proj-links{display:flex; gap:16px; font-family:var(--mono); font-size:13px;}
+  .proj-links a{color:var(--amber); border-bottom:1px solid transparent;}
+  .proj-links a:hover{border-color:var(--amber);}
+
+  /* TESTIMONIALS */
+  .rev-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
+  @media (max-width:780px){.rev-grid{grid-template-columns:1fr;}}
+  .rev-card{background:var(--bg-elev); border:1px solid var(--line); border-radius:12px; padding:24px;}
+  .rev-quote{font-size:14.5px; color:var(--text); margin-bottom:16px; font-style:italic;}
+  .rev-name{font-family:var(--mono); font-size:13px; color:var(--teal);}
+  .rev-role{font-size:12px; color:var(--text-dim);}
+  .stars{color:var(--amber); font-size:13px; margin-bottom:10px;}
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:16px;
+    padding:48px; text-align:center;
+  }
+  .contact-box h2{font-family:var(--display); font-size:clamp(24px,3vw,32px); margin-bottom:12px;}
+  .contact-box p{color:var(--text-dim); margin-bottom:28px;}
+  .contact-links{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-33px; top:4px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--amber);
+  }
+  .tl-date{font-family:var(--mono); font-size:12px; color:var(--amber); margin-bottom:6px;}
+  .tl-role{font-family:var(--display); font-size:18px; font-weight:600; margin-bottom:2px;}
+  .tl-company{font-size:13.5px; color:var(--text-dim); margin-bottom:10px;}
+  .tl-desc{font-size:14.5px; color:var(--text-dim);}
+
+  /* PROJECT IMAGES */
+  .proj-shot{
+    width:100%; aspect-ratio:16/9; border-radius:10px;
+    background:linear-gradient(160deg,var(--bg-elev-2),#0E1116);
+    border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden; margin-bottom:18px;
+  }
+  .proj-shot img{width:100%; height:100%; object-fit:cover; display:block;}
+  .shot-placeholder{color:var(--text-dim); font-family:var(--mono); font-size:11.5px; text-align:center; padding:0 16px;}
+
+  /* CERTIFICATES */
+  .cert-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:780px){.cert-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-card{background:var(--bg-elev); border:1px solid var(--line); border-radius:12px; padding:16px; transition:.2s;}
+  .cert-card:hover{border-color:var(--amber);}
+  .cert-img{
+    width:100%; aspect-ratio:4/3; border-radius:8px; margin-bottom:14px;
+    background:linear-gradient(160deg,var(--bg-elev-2),#0E1116);
+    border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .cert-img img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cert-name{font-family:var(--display); font-size:15px; font-weight:600; margin-bottom:4px;}
+  .cert-issuer{font-family:var(--mono); font-size:12px; color:var(--teal);}
+  .cert-date{font-size:11.5px; color:var(--text-dim); margin-top:2px;}
+
+  footer{padding:32px 0; text-align:center; font-family:var(--mono); font-size:12px; color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">ahmed<span>.arabi()</span></div>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#certificates">certificates</a>
+      <a href="#reviews">reviews</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="status-chip">200 OK — open to backend roles</div>
+      <h1 class="title">Ahmed <span class="accent">Arabi</span><br>Mabrouk Arabi</h1>
+      <div class="role-line">.NET Backend Developer<span class="blink"></span></div>
+      <p class="hero-desc">
+        I build REST APIs with ASP.NET Core &amp; C# — clean architecture, solid database design,
+        and the occasional frontend when an API needs a face. 4 shipped projects, 2 with a full UI on top.
+      </p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="avatar-card">
+      <div class="avatar-frame">
+        <!-- Replace this div's content with: <img src="your-photo.jpg" alt="Ahmed Arabi"> -->
+        <div class="avatar-placeholder">// your photo goes here<br>replace this block with<br>&lt;img src="photo.jpg"&gt;</div>
+      </div>
+      <div class="term-line"><span>role</span><b>backend_developer</b></div>
+      <div class="term-line"><span>stack</span><b>C# · .NET · SQL</b></div>
+      <div class="term-line"><span>status</span><b>available</b></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">// 01</span><h2 class="sec-title">About</h2></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a backend developer focused on the .NET ecosystem — designing and shipping APIs that are reliable, well-structured, and easy for other developers to build on top of.</p>
+        <p>My work usually starts at the database and the domain model, then moves up through clean API layers, authentication, and documentation. On a couple of projects I went further and built the frontend myself, so I understand both sides of the request.</p>
+        <p>I care about code that's easy to read six months later, not just code that works today.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><div class="stat-num">04</div><div class="stat-label">APIs shipped</div></div>
+        <div class="stat-card"><div class="stat-num">02</div><div class="stat-label">Full-stack builds</div></div>
+        <div class="stat-card"><div class="stat-num">C#</div><div class="stat-label">Core language</div></div>
+        <div class="stat-card"><div class="stat-num">.NET</div><div class="stat-label">Framework</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">// 02</span><h2 class="sec-title">Skills</h2></div>
+    <div class="skills-wrap">
+      <span class="skill-pill">C#</span>
+      <span class="skill-pill">ASP.NET Core</span>
+      <span class="skill-pill">Web API</span>
+      <span class="skill-pill">Entity Framework Core</span>
+      <span class="skill-pill">SQL Server</span>
+      <span class="skill-pill">REST Architecture</span>
+      <span class="skill-pill">JWT Authentication</span>
+      <span class="skill-pill">LINQ</span>
+      <span class="skill-pill">Clean Architecture</span>
+      <span class="skill-pill">Git &amp; GitHub</span>
+      <span class="skill-pill">HTML / CSS / JS</span>
+      <span class="skill-pill">Postman</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">// 03</span><h2 class="sec-title">Experience</h2></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">[2025 — Present]</div>
+        <div class="tl-role">[Job Title — e.g. Backend Developer]</div>
+        <div class="tl-company">[Company Name · Freelance / Full-time / Remote]</div>
+        <div class="tl-desc">[What you actually did: APIs you built, team size, tools used, an outcome if you have one — e.g. "reduced API response time by X%".]</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">[2024 — 2025]</div>
+        <div class="tl-role">[Job Title / Internship / Freelance project]</div>
+        <div class="tl-company">[Company or Client Name]</div>
+        <div class="tl-desc">[Same idea — keep it short, specific, and results-focused.]</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">[2023 — 2024]</div>
+        <div class="tl-role">[Earlier role / learning phase]</div>
+        <div class="tl-company">[e.g. "Self-taught — C# &amp; .NET fundamentals"]</div>
+        <div class="tl-desc">[How you got started — courses, first projects, what pushed you toward backend.]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">// 04</span><h2 class="sec-title">Projects</h2></div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="method get">GET</span>
+        <span class="endpoint">/api/projects/01</span>
+        <span class="status-200">200 OK</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-shot">
+          <!-- Replace with: <img src="project1.jpg" alt="Project One screenshot"> -->
+          <div class="shot-placeholder">// screenshot goes here<br>replace with &lt;img src="project1.jpg"&gt;</div>
+        </div>
+        <div class="proj-name">Project One — [add real name]</div>
+        <p class="proj-desc">[Write 2–3 lines: what problem this API solves, who it's for, and the main features — e.g. user management, products, orders, etc.]</p>
+        <div class="tech-row">
+          <span class="tech-tag">ASP.NET Core</span>
+          <span class="tech-tag">SQL Server</span>
+          <span class="tech-tag">EF Core</span>
+        </div>
+        <div class="proj-links">
+          <a href="#">GitHub →</a>
+          <a href="#">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="method get">GET</span>
+        <span class="endpoint">/api/projects/02</span>
+        <span class="status-200">200 OK</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-shot">
+          <!-- Replace with: <img src="project2.jpg" alt="Project Two screenshot"> -->
+          <div class="shot-placeholder">// screenshot goes here<br>replace with &lt;img src="project2.jpg"&gt;</div>
+        </div>
+        <div class="proj-name">Project Two — [add real name]</div>
+        <p class="proj-desc">[Describe the API: core endpoints, authentication approach, and any standout feature like background jobs, caching, or reporting.]</p>
+        <div class="tech-row">
+          <span class="tech-tag">ASP.NET Core</span>
+          <span class="tech-tag">JWT Auth</span>
+          <span class="tech-tag">SQL Server</span>
+        </div>
+        <div class="proj-links">
+          <a href="#">GitHub →</a>
+          <a href="#">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="method get">GET</span>
+        <span class="endpoint">/api/projects/03</span>
+        <span class="status-200">200 OK</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-shot">
+          <!-- Replace with: <img src="project3.jpg" alt="Project Three screenshot"> -->
+          <div class="shot-placeholder">// screenshot goes here<br>replace with &lt;img src="project3.jpg"&gt;</div>
+        </div>
+        <div class="proj-name">Project Three — [add real name, full-stack]</div>
+        <p class="proj-desc">[This is one of the two projects with a frontend — mention what the UI lets users do, and how it talks to your API.]</p>
+        <div class="tech-row">
+          <span class="tech-tag">ASP.NET Core</span>
+          <span class="tech-tag">HTML/CSS/JS</span>
+          <span class="tech-tag">SQL Server</span>
+        </div>
+        <div class="proj-links">
+          <a href="#">GitHub →</a>
+          <a href="#">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-head">
+        <span class="method get">GET</span>
+        <span class="endpoint">/api/projects/04</span>
+        <span class="status-200">200 OK</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-shot">
+          <!-- Replace with: <img src="project4.jpg" alt="Project Four screenshot"> -->
+          <div class="shot-placeholder">// screenshot goes here<br>replace with &lt;img src="project4.jpg"&gt;</div>
+        </div>
+        <div class="proj-name">Project Four — [add real name, full-stack]</div>
+        <p class="proj-desc">[Second full-stack project — describe the use case and what made it technically interesting to build.]</p>
+        <div class="tech-row">
+          <span class="tech-tag">ASP.NET Core</span>
+          <span class="tech-tag">HTML/CSS/JS</span>
+          <span class="tech-tag">EF Core</span>
+        </div>
+        <div class="proj-links">
+          <a href="#">GitHub →</a>
+          <a href="#">Live Demo →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="certificates">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">// 05</span><h2 class="sec-title">Certificates</h2></div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-img">
+          <!-- Replace with: <img src="cert1.jpg" alt="Certificate name"> -->
+        </div>
+        <div class="cert-name">[Certificate Name]</div>
+        <div class="cert-issuer">[Issuer — e.g. Microsoft, Udemy]</div>
+        <div class="cert-date">[Month Year]</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-img">
+          <!-- Replace with: <img src="cert2.jpg" alt="Certificate name"> -->
+        </div>
+        <div class="cert-name">[Certificate Name]</div>
+        <div class="cert-issuer">[Issuer]</div>
+        <div class="cert-date">[Month Year]</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-img">
+          <!-- Replace with: <img src="cert3.jpg" alt="Certificate name"> -->
+        </div>
+        <div class="cert-name">[Certificate Name]</div>
+        <div class="cert-issuer">[Issuer]</div>
+        <div class="cert-date">[Month Year]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-tag">// 06</span><h2 class="sec-title">Client Reviews</h2></div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote">"[Add a real client quote here — what they hired Ahmed for and how it went.]"</p>
+        <div class="rev-name">[Client Name]</div>
+        <div class="rev-role">[Project / Company]</div>
+      </div>
+      <div class="rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote">"[Add a second testimonial — be specific: delivery speed, communication, code quality, etc.]"</p>
+        <div class="rev-name">[Client Name]</div>
+        <div class="rev-role">[Project / Company]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <h2>Let's build something solid.</h2>
+      <p>Open to freelance work and backend roles — drop a message and I'll get back to you.</p>
+      <div class="contact-links">
+        <a href="mailto:" class="btn btn-primary">✉ Email</a>
+        <a href="#" class="btn btn-ghost">LinkedIn</a>
+        <a href="#" class="btn btn-ghost">GitHub</a>
+        <a href="#" class="btn btn-ghost">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Ahmed Arabi Mabrouk Arabi — Built with C# energy and a lot of coffee.
+</footer>
+
+</body>
+</html>
