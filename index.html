@@ -44,7 +44,6 @@
   a{color:inherit; text-decoration:none;}
   .wrap{max-width:1040px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
 
-  /* NAV */
   nav{
     position:sticky; top:0; z-index:50;
     backdrop-filter: blur(10px);
@@ -59,7 +58,6 @@
   .navlinks a:hover{color:var(--amber);}
   @media (max-width:640px){ .navlinks{display:none;} }
 
-  /* HERO */
   header.hero{padding:88px 0 70px; position:relative;}
   .status-chip{
     display:inline-flex; align-items:center; gap:8px;
@@ -107,14 +105,12 @@
   .term-line{font-family:var(--mono); font-size:12px; color:var(--text-dim); display:flex; justify-content:space-between;}
   .term-line b{color:var(--teal); font-weight:500;}
 
-  /* SECTION HEADERS */
   .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:38px;}
   .sec-tag{font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:1px;}
   .sec-title{font-family:var(--display); font-size:clamp(26px,3vw,34px); font-weight:600;}
   section{padding:80px 0;}
   section + section{border-top:1px solid var(--line);}
 
-  /* ABOUT */
   .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
   @media (max-width:780px){.about-grid{grid-template-columns:1fr;}}
   .about-text p{color:var(--text-dim); margin-bottom:16px; font-size:15.5px;}
@@ -123,7 +119,6 @@
   .stat-num{font-family:var(--mono); font-size:28px; color:var(--teal); font-weight:600;}
   .stat-label{font-size:12.5px; color:var(--text-dim); margin-top:4px;}
 
-  /* SKILLS */
   .skills-wrap{display:flex; flex-wrap:wrap; gap:10px;}
   .skill-pill{
     font-family:var(--mono); font-size:13px; color:var(--text);
@@ -132,7 +127,6 @@
   }
   .skill-pill:hover{border-color:var(--amber); color:var(--amber);}
 
-  /* PROJECTS — API endpoint cards */
   .proj-card{
     background:var(--bg-elev); border:1px solid var(--line); border-radius:14px;
     margin-bottom:22px; overflow:hidden;
@@ -154,7 +148,6 @@
   .proj-links a{color:var(--amber); border-bottom:1px solid transparent;}
   .proj-links a:hover{border-color:var(--amber);}
 
-  /* TESTIMONIALS */
   .rev-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px;}
   @media (max-width:780px){.rev-grid{grid-template-columns:1fr;}}
   .rev-card{background:var(--bg-elev); border:1px solid var(--line); border-radius:12px; padding:24px;}
@@ -163,7 +156,6 @@
   .rev-role{font-size:12px; color:var(--text-dim);}
   .stars{color:var(--amber); font-size:13px; margin-bottom:10px;}
 
-  /* CONTACT */
   .contact-box{
     background:var(--bg-elev); border:1px solid var(--line); border-radius:16px;
     padding:48px; text-align:center;
@@ -172,7 +164,6 @@
   .contact-box p{color:var(--text-dim); margin-bottom:28px;}
   .contact-links{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
 
-  /* EXPERIENCE TIMELINE */
   .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
   .tl-item{position:relative; padding-bottom:36px;}
   .tl-item:last-child{padding-bottom:0;}
@@ -186,7 +177,6 @@
   .tl-company{font-size:13.5px; color:var(--text-dim); margin-bottom:10px;}
   .tl-desc{font-size:14.5px; color:var(--text-dim);}
 
-  /* PROJECT IMAGES */
   .proj-shot{
     width:100%; aspect-ratio:16/9; border-radius:10px;
     background:linear-gradient(160deg,var(--bg-elev-2),#0E1116);
@@ -197,7 +187,6 @@
   .proj-shot img{width:100%; height:100%; object-fit:cover; display:block;}
   .shot-placeholder{color:var(--text-dim); font-family:var(--mono); font-size:11.5px; text-align:center; padding:0 16px;}
 
-  /* CERTIFICATES */
   .cert-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
   @media (max-width:780px){.cert-grid{grid-template-columns:1fr 1fr;}}
   @media (max-width:520px){.cert-grid{grid-template-columns:1fr;}}
@@ -213,6 +202,24 @@
   .cert-name{font-family:var(--display); font-size:15px; font-weight:600; margin-bottom:4px;}
   .cert-issuer{font-family:var(--mono); font-size:12px; color:var(--teal);}
   .cert-date{font-size:11.5px; color:var(--text-dim); margin-top:2px;}
+
+  .rev-form{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:14px;
+    padding:28px; margin-top:28px; max-width:520px;
+  }
+  .rev-form-title{font-family:var(--display); font-size:18px; margin-bottom:16px;}
+  .rev-form-row{display:flex; gap:12px; margin-bottom:12px;}
+  .rev-form input, .rev-form select, .rev-form textarea{
+    width:100%; background:var(--bg); border:1px solid var(--line); border-radius:8px;
+    color:var(--text); padding:11px 14px; font-family:var(--body); font-size:14px;
+    margin-bottom:12px; outline:none;
+  }
+  .rev-form-row input{margin-bottom:0;}
+  .rev-form input:focus, .rev-form select:focus, .rev-form textarea:focus{border-color:var(--amber);}
+  .rev-form textarea{resize:vertical;}
+  .rev-status{font-family:var(--mono); font-size:12.5px; margin-top:10px;}
+  .rev-status.ok{color:var(--teal);}
+  .rev-status.err{color:var(--red);}
 
   footer{padding:32px 0; text-align:center; font-family:var(--mono); font-size:12px; color:var(--text-dim);}
 </style>
@@ -251,8 +258,7 @@
     </div>
     <div class="avatar-card">
       <div class="avatar-frame">
-        <!-- Replace this div's content with: <img src="your-photo.jpg" alt="Ahmed Oraby"> -->
-            <img src="photo.png" alt="Ahmed Oraby">
+        <img src="photo.png" alt="Ahmed Oraby">
       </div>
       <div class="term-line"><span>role</span><b>backend_developer</b></div>
       <div class="term-line"><span>stack</span><b>C# · .NET · SQL</b></div>
@@ -364,13 +370,29 @@
 <section id="reviews">
   <div class="wrap">
     <div class="sec-head"><span class="sec-tag">// 06</span><h2 class="sec-title">Client Reviews</h2></div>
-    <div class="rev-grid">
-      <div class="rev-card">
-        <div class="stars">★★★★★</div>
-        <p class="rev-quote">"[Add a second testimonial — be specific: delivery speed, communication, code quality, etc.]"</p>
-        <div class="rev-name">[Client Name]</div>
-        <div class="rev-role">[Project / Company]</div>
-      </div>
+
+    <div id="reviews-list" class="rev-grid">
+      <p style="color:var(--text-dim); font-family:var(--mono); font-size:13px;">Loading reviews…</p>
+    </div>
+
+    <div class="rev-form">
+      <h3 class="rev-form-title">Leave a review</h3>
+      <form id="review-form">
+        <div class="rev-form-row">
+          <input type="text" id="review-name" placeholder="Your name" required maxlength="59">
+          <input type="text" id="review-role" placeholder="Company / Project (optional)" maxlength="59">
+        </div>
+        <select id="review-rating" required>
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+          <option value="2">★★☆☆☆ (2)</option>
+          <option value="1">★☆☆☆☆ (1)</option>
+        </select>
+        <textarea id="review-text" placeholder="Your review..." required maxlength="499" rows="3"></textarea>
+        <button type="submit" class="btn btn-primary" id="review-submit-btn">Submit Review</button>
+        <p id="review-status" class="rev-status"></p>
+      </form>
     </div>
   </div>
 </section>
@@ -393,6 +415,107 @@
 <footer>
   © 2026 Ahmed Oraby MubarakOraby — Built with C# energy and a lot of coffee.
 </footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc, query, where, getDocs, orderBy
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDaVa4FCVnsH8_YINQoOP2MI_TQ7bKr88E",
+    authDomain: "ahmed-portfolio-45cbc.firebaseapp.com",
+    projectId: "ahmed-portfolio-45cbc",
+    storageBucket: "ahmed-portfolio-45cbc.firebasestorage.app",
+    messagingSenderId: "1003880575628",
+    appId: "1:1003880575628:web:4f3af314e902eaec3141a9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const reviewsCol = collection(db, "reviews");
+
+  function starString(n){
+    const num = parseInt(n, 10) || 5;
+    return "★".repeat(num) + "☆".repeat(5 - num);
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  async function loadReviews(){
+    const listEl = document.getElementById("reviews-list");
+    try{
+      const q = query(reviewsCol, where("approved", "==", true), orderBy("createdAt", "desc"));
+      const snap = await getDocs(q);
+      if(snap.empty){
+        listEl.innerHTML = '<p style="color:var(--text-dim); font-family:var(--mono); font-size:13px;">No reviews yet — be the first!</p>';
+        return;
+      }
+      listEl.innerHTML = "";
+      snap.forEach(doc => {
+        const r = doc.data();
+        const card = document.createElement("div");
+        card.className = "rev-card";
+        card.innerHTML = `
+          <div class="stars">${starString(r.rating)}</div>
+          <p class="rev-quote">"${escapeHtml(r.text || "")}"</p>
+          <div class="rev-name">${escapeHtml(r.name || "Anonymous")}</div>
+          <div class="rev-role">${escapeHtml(r.role || "")}</div>
+        `;
+        listEl.appendChild(card);
+      });
+    }catch(err){
+      console.error(err);
+      listEl.innerHTML = '<p style="color:var(--red); font-family:var(--mono); font-size:13px;">Could not load reviews right now.</p>';
+    }
+  }
+
+  const form = document.getElementById("review-form");
+  if(form){
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("review-submit-btn");
+      const statusEl = document.getElementById("review-status");
+      const name = document.getElementById("review-name").value.trim();
+      const role = document.getElementById("review-role").value.trim();
+      const rating = document.getElementById("review-rating").value;
+      const text = document.getElementById("review-text").value.trim();
+
+      if(!name || !text){
+        statusEl.textContent = "Please fill in your name and review.";
+        statusEl.className = "rev-status err";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Submitting...";
+
+      try{
+        await addDoc(reviewsCol, {
+          name, role, rating, text,
+          approved: false,
+          createdAt: new Date()
+        });
+        statusEl.textContent = "Thanks! Your review will appear once approved.";
+        statusEl.className = "rev-status ok";
+        form.reset();
+      }catch(err){
+        console.error(err);
+        statusEl.textContent = "Something went wrong, please try again.";
+        statusEl.className = "rev-status err";
+      }finally{
+        btn.disabled = false;
+        btn.textContent = "Submit Review";
+      }
+    });
+  }
+
+  loadReviews();
+</script>
 
 </body>
 </html>
