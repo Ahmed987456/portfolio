@@ -416,6 +416,7 @@
   © 2026 Ahmed Oraby MubarakOraby — Built with C# energy and a lot of coffee.
 </footer>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import {
@@ -434,6 +435,13 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const reviewsCol = collection(db, "reviews");
+
+  const EMAILJS_SERVICE_ID = "service_79g2zlg";
+  const EMAILJS_TEMPLATE_ID = "template_dochsf2";
+  const EMAILJS_PUBLIC_KEY = "j_3i75S0m8oR83wzy";
+  if(window.emailjs){
+    window.emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
 
   function starString(n){
     const num = parseInt(n, 10) || 5;
@@ -500,6 +508,17 @@
           approved: false,
           createdAt: new Date()
         });
+
+        if(window.emailjs){
+          window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            name: name,
+            role: role || "—",
+            rating: rating,
+            message: text,
+            time: new Date().toLocaleString("ar-EG")
+          }).catch(err => console.error("EmailJS error:", err));
+        }
+
         statusEl.textContent = "Thanks! Your review will appear once approved.";
         statusEl.className = "rev-status ok";
         form.reset();
